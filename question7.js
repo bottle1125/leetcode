@@ -1,3 +1,7 @@
+/*
+给定一个范围为 32 位 int 的整数，将其颠倒。
+*/
+
 /**
  * @param {number} x
  * @return {number}
