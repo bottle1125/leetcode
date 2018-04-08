@@ -1,47 +1,31 @@
 /*
-数数并说序列是一个整数序列，第二项起每一项的值为对前一项的计数，其前五项如下：
-1.     1
-2.     11
-3.     21
-4.     1211
-5.     111221
-1 被读作 "一个一" 即 11。
-11 被读作  "两个一" 即 21。
-21 被读作  "一个二 和 一个一" 即 1211。
+判断一个整数是否是回文数。不能使用辅助空间。
 
-给一个正整数 n ，输出数数并说序列的第 n 项。
+一些提示:
 
-注意：该整数序列的每项都输出为字符串。
+负整数可以是回文数吗？（例如 -1）
+
+如果你打算把整数转为字符串，请注意不允许使用辅助空间的限制。
+
+你也可以考虑将数字颠倒。但是如果你已经解决了 “颠倒整数” 问题的话，就会注意到颠倒整数时可能会发生溢出。你怎么来解决这个问题呢？
+
+本题有一种比较通用的解决方式。
 */
 
 /**
- * @param {number} n
- * @return {string}
+ * @param {number} x
+ * @return {boolean}
  */
-var countAndSay = function(n) {
-    if(n === 1) {
-        return '1';
+var isPalindrome = function(x) {
+    var result = 0;
+    var tpl = x;
+    if(x < 0 || (x !== 0) && x % 10 === 0) return false;
+    while(x) {
+        result = result * 10 + x % 10;
+        x = Math.floor(x / 10);
     }
-    if(n === 2) {
-        return '11';
-    }
-    var value = countAndSay(n - 1);
-    var arr = value.split('');
 
-    var result = [];
-    var num = 1;
-    for(var i=1; i<arr.length; i++) {
-        if(arr[i] !== arr[i-1]) {
-            result.push(num, arr[i - 1]);
-            num = 1;
-        }
-        else {
-            num++;
-        }
-    }
-    result.push(num, arr[arr.length - 1])
-
-    return result.join('');
+    return tpl === result || tpl === result / 10;
 };
 
-console.log(countAndSay(6));
+console.log(isPalindrome(1001));
