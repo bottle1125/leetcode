@@ -4,12 +4,15 @@
  * 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
  */
 
- 
+
 /**
  * @param {string} digits
  * @return {string[]}
  */
 var letterCombinations = function(digits) {
+    if(!digits) {
+        return [];
+    }
     const numArray = digits.split('');
     const codeArray = [];
     
