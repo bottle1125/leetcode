@@ -28,9 +28,7 @@ var isSodokuValid = function(board) {
                     }
 
                     board[i][j] = String(k);
-                    // console.log(i, j, k, isSodokuValid(board));
-
-
+                    // 判断剩余格子能否在填入该数的情况下也得到有效数，若不能，则置空，重新填入（回溯法）
                     if(!isSodokuValid(board)) {
                         board[i][j] = '.';
                         if(k === 9) return false;
@@ -50,6 +48,7 @@ var isValid = function(i, j, k, board) {
     return isRowValid(k, board[i]) && isColValid(k, j, board) && isGridValid(k, i, j, board);
 }
 
+// 判断是否已存在于行中
 var isRowValid = function(k, datas) {
     k += '';
     if(datas.indexOf(k) > -1) {
@@ -58,6 +57,7 @@ var isRowValid = function(k, datas) {
     return true;
 }
 
+// 判断是否已存在于列中
 var isColValid = function(k, j, board) {
     k += '';
     var colData = [];
@@ -74,6 +74,7 @@ var isColValid = function(k, j, board) {
     return true;
 }
 
+// 判断是否已存在于小宫格中
 var isGridValid = function(k, i, j, board) {
     k += '';
     var gridData = [];
@@ -85,8 +86,6 @@ var isGridValid = function(k, i, j, board) {
             }
         }
     }
-
-    console.log(gridData, i, j, k);
 
     if(gridData.indexOf(k) > -1) {
         return false;
